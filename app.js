@@ -1,0 +1,164 @@
+const employees = [
+  {
+    name: "Rakibul Alam",
+    //activity: [1670395500000, 1670395800000,1670397300000,1670397600000],
+     activity: [1670486400000, 1670493000000,1670494500000,1670500800000,1670502000000,1670511600000],
+  },
+];
+
+let parent = document.getElementsByClassName("time-content");
+
+
+const timeContent = d3
+  .selectAll(".time-content")
+  .selectAll(".time-content")
+  .data([...new Array(60)])
+  .enter()
+  .append("span")
+  .classed("minute", true);
+
+console.log(timeContent, "timecontent...");
+
+ for(let i = 0; i<parent.length;i++){
+  let employeeTime = employees[0].activity;
+  for(j = 0;j<employeeTime.length;j++){
+    if(j % 2 === 0){
+      let startTime = new Date(employeeTime[j]);
+      let endTime = new Date(employeeTime[j+1]);
+      if(parent[i].id === startTime.getHours().toString()){
+        const timeContent = document.getElementById(parent[i].id);
+        const timecontentChilds = timeContent.children;
+        for (let i = 0; i < timecontentChilds.length; i++) {
+          if(i>=startTime.getMinutes()){
+            timecontentChilds[i].classList.remove('out-office');
+            timecontentChilds[i].classList.add('in-office');
+          }
+        }
+        
+      }
+      if(startTime.getHours().toString() < endTime.getHours().toString()){
+        if(parent[i].id === startTime.getHours().toString()){
+          const timeContent = document.getElementById(parent[i].id);
+          timeContent.classList.add('in-border')
+        }
+      }
+    }else{
+      let startTime = new Date(employeeTime[j-1])
+      let endTime = new Date(employeeTime[j]);
+      if(startTime.getHours().toString() === endTime.getHours().toString()){
+        if(parent[i].id === endTime.getHours().toString()){
+          const timeContent = document.getElementById(parent[i].id);
+          const timecontentChilds = timeContent.children;
+          // console.log(timecontentChilds.length,'length')
+          for (let i = 0; i < timecontentChilds.length; i++) {
+            if(endTime.getMinutes() <= i){
+              timecontentChilds[i].classList.remove('in-office');
+              timecontentChilds[i].classList.add('out-office');
+            }
+          }
+        }
+      }else if(startTime.getHours().toString() < endTime.getHours().toString()){
+        if(parent[i].id === endTime.getHours().toString()){
+          const timeContent = document.getElementById(parent[i].id);
+          const timecontentChilds = timeContent.children;
+          for (let i = 0; i < timecontentChilds.length; i++) {
+            if(endTime.getMinutes() > i){
+              timecontentChilds[i].classList.remove('out-office');
+              timecontentChilds[i].classList.add('in-office');
+            }
+          }
+        }
+        if (
+          startTime.getHours().toString() < endTime.getHours().toString() &&
+          parent[i].id  < endTime.getHours().toString() &&
+          parent[i].id  > startTime.getHours().toString()
+        ) {
+          let timeContent = document.getElementById(parent[i].id);
+          timeContent.classList.add("hour-in-office");
+        }
+      }
+      /* if(parent[i].id === endTime.getHours().toString()){
+        const timeContent = document.getElementById(parent[i].id);
+        const timecontentChilds = timeContent.children;
+        for (let i = 0; i < timecontentChilds.length; i++) {
+          if(i=>endTime.getMinutes()){
+            timecontentChilds[i].classList.add('out-office');
+          }
+          else if(i<endTime.getMinutes()){
+            timecontentChilds[i].classList.add('in-office');
+          }
+        }
+        
+      } */
+    }
+  }
+} 
+
+ /* for (let i = 0; i < parent.length; i++) {
+  let rakibTime = employees[0].activity;
+  for (let j = 0; j < rakibTime.length; j++) {
+    if (j % 2 === 0) {
+      let startTime = new Date(rakibTime[j]);
+      if (parent[i].id === startTime.getHours().toString()) {
+        const timeContent = document.getElementById(parent[i].id);
+        const timecontentChilds = timeContent.children;
+        for (let i = 0; i < timecontentChilds.length; i++) {
+          if (i + 1 <= startTime.getMinutes()) {
+            console.log(i+1,startTime.getMinutes())
+            // console.log(startTime.getMinutes(),'starttime minutes...')
+            if(timecontentChilds[i].classList.contains('in-office')){
+              // timecontentChilds[i].classList.remove("in-office")
+            }
+            else{
+              timecontentChilds[i].classList.add("out-office");
+            }
+          }
+          if (i + 1 >= startTime.getMinutes()){
+            if(timecontentChilds[i].classList.contains('out-office')){
+            }else{
+              timecontentChilds[i].classList.add("in-office");
+            }
+          }
+        }
+      }
+    } else {
+      let startTime = j - 1 >= 0 && new Date(rakibTime[j - 1]);
+      let endTime = new Date(rakibTime[j]);
+      if (parent[i].id === endTime.getHours().toString()) {
+        const timeContent = document.getElementById(parent[i].id);
+        const timecontentChilds = timeContent.children;
+        for (let i = 0; i < timecontentChilds.length; i++) {
+          if (i + 1 <= endTime.getMinutes()){
+            if(timecontentChilds[i].classList.contains('in-office')){
+              // timecontentChilds[i].classList.remove("in-office")
+            }else{
+              timecontentChilds[i].classList.add("out-office");
+            }
+            // console.log(endTime.getMinutes(),'minutes...')
+            // timecontentChilds[i].classList.add("in-office");
+          }else{
+            timecontentChilds[i].classList.remove("in-office")
+            timecontentChilds[i].classList.add("out-office");
+          }
+            
+          // timeContent.classList.add("d-flex");
+        }
+      }
+      if (
+        startTime.getHours().toString() < endTime.getHours().toString() &&
+        parent[i].id + 1 < endTime.getHours().toString() &&
+        parent[i].id + 1 > startTime.getHours().toString()
+      ) {
+        let timeContent = document.getElementById(parent[i].id);
+        console.log(timeContent, "timecontent....in endtime");
+        timeContent.classList.add("hour-in-office");
+      }
+      if(startTime.getHours().toString() === endTime.getHours().toString()){
+          console.log(startTime.getHours(),endTime.getHours(),'same hours')
+          
+      }
+    }
+
+  }
+} */
+ 

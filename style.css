@@ -1,0 +1,129 @@
+.time-container {
+  display: flex;
+  font-weight: bold;
+  background-color: #dddddd;
+  padding-left: 2px;
+  padding-right: 1px;
+  padding-bottom: 5px;
+  border-radius: 5px;
+}
+
+.time-content {
+  background-color: #eeeeee;
+  margin-top: 2px;
+  border-right: 1px solid #dddddd;
+  width: 100%;
+  position: relative;
+}
+
+.time-content::after {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  content: "";
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.time-content:first-child::after {
+  content: "10am";
+}
+.time-content:nth-child(2)::after {
+  content: "11am";
+}
+.time-content:nth-child(3)::after {
+  content: "12pm";
+}
+.time-content:nth-child(4)::after {
+  content: "1pm";
+}
+.time-content:nth-child(5)::after {
+  content: "2pm";
+}
+.time-content:nth-child(6)::after {
+  content: "3pm";
+}
+.time-content:nth-child(7)::after {
+  content: "4pm";
+}
+.time-content:nth-child(8)::after {
+  content: "5pm";
+}
+.time-content:nth-child(9)::after {
+  content: "6pm";
+}
+.time-content:nth-child(10)::after {
+  content: "7pm";
+}
+.time-content:nth-child(11)::after {
+  content: "8pm";
+}
+.time-content:nth-child(12)::after {
+  content: "9pm";
+}
+.time-content:nth-child(13)::after {
+  content: "10pm";
+}
+.time-content:nth-child(14)::after {
+  content: "11pm";
+}
+.time-content:nth-child(15)::after {
+  content: "12pm";
+}
+
+.curve-border-first-child {
+  border-radius: 5px 0 0 5px;
+}
+
+.curve-border-last-child {
+  border-radius: 0 5px 5px 0;
+}
+.minute {
+  /* background: #eeeeee; */
+  height: 100%;
+  width: 1.6666666666666666666666666666667%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.in-office {
+  background: #a7c47d;
+  height: 100%;
+  width: 1.6666666666666666666666666666667%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.out-office {
+  background: #eeeeee;
+  height: 100%;
+  width: 1.6666666666666666666666666666667%;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.hour-in-office {
+  display: flex;
+  background: #a7c47d;
+  border-color: #a3c079;
+}
+
+.in-border {
+  border-right: 2px solid #a3c079;
+}
+
+.d-flex {
+  /* border-color: #a3c079; */
+  /* justify-content: center; */
+}
+
+.middle-hours {
+  display: flex;
+  border-color: #a3c079;
+}
